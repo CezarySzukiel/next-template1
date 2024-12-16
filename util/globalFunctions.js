@@ -1,3 +1,3 @@
 export const getLocalizedURL = (path, lang) => {
-    return lang === "en" ? path : `${path}?lang=${lang}`;
+    return lang === "pl" ? path : `${path}?lang=${lang}`;
 };

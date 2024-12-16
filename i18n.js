@@ -1,6 +1,6 @@
 module.exports = {
     locales: ["en", "pl"],
-    defaultLocale: "pl",
+    defaultLocale: 'pl',
     logBuild: false,
     pages: {
         "*": ["common"]

@@ -1,4 +1,3 @@
-'use client'
 import NavBar from "../components/NavBar";
 import React from "react";
 import {ThemeProvider} from '@mui/material/styles';
@@ -16,11 +15,12 @@ export default function RootLayout({children}) {
     return (
         <html>
         <head>
+            {/* ahrefs authentication script */}
             <script src="https://analytics.ahrefs.com/analytics.js" data-key="r3laZsitpYt6zRSM+0fFZw"
                     defer="true"></script>
         </head>
         <body>
-        <AppRouterCacheProvider options={{enableCssLayer: true}}>
+        <AppRouterCacheProvider>
             <ThemeProvider theme={darkTheme}>
                 <CssBaseline/>
                 <NavBar/>
