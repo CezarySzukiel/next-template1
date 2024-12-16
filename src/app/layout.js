@@ -15,6 +15,10 @@ export default function RootLayout({children}) {
 
     return (
         <html>
+        <head>
+            <script src="https://analytics.ahrefs.com/analytics.js" data-key="r3laZsitpYt6zRSM+0fFZw"
+                    defer="true"></script>
+        </head>
         <body>
         <AppRouterCacheProvider options={{enableCssLayer: true}}>
             <ThemeProvider theme={darkTheme}>
