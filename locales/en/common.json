@@ -1,0 +1,7 @@
+{
+  "welcome": "Welcome!",
+  "about": "about",
+  "home": "Home",
+  "message_1": "Test message for Homepage rendered in 'use client' component",
+  "message_2": "Test message for About page rendered in 'use client' component"
+}

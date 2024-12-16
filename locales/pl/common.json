@@ -1,0 +1,7 @@
+{
+  "welcome": "Witam",
+  "about": "o mnie",
+  "home": "strona startowa",
+  "message_1": "wiadomość testowa dla strony domowej wyrenderowana w komponencie 'use client'",
+  "message_2": "wiadomość testowa dla strony o nas wyrenderowana w komponencie 'use client'"
+}
