@@ -1,20 +1,18 @@
 'use client';
 
-import { FormControl, MenuItem, Select } from '@mui/material';
+import {FormControl, MenuItem, Select} from '@mui/material';
 import useTranslation from 'next-translate/useTranslation';
 import i18n from '../../i18n';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Cookies from 'js-cookie';
 
 export default function LangSelect() {
-    const { t, lang } = useTranslation('common');
+    const {t, lang} = useTranslation('common');
     const languages = i18n.locales;
     const defaultLanguage = i18n.defaultLocale;
-
     const language = Cookies.get('NEXT_LOCALE_') || defaultLanguage;
-
     const setLangCookie = (lang) => {
-        Cookies.set('NEXT_LOCALE_', lang, { expires: 90 });
+        Cookies.set('NEXT_LOCALE_', lang, {expires: 90});
     };
 
     useEffect(() => {
@@ -39,14 +37,14 @@ export default function LangSelect() {
     };
 
     return (
-        <FormControl sx={{ minWidth: 50 }}>
+        <FormControl sx={{minWidth: 50}}>
             <Select
                 value={language}
                 variant="standard"
                 disableUnderline
                 onChange={handleChange}
                 sx={{
-                    '.MuiInput-input': { backgroundColor: 'transparent!important' },
+                    '.MuiInput-input': {backgroundColor: 'transparent!important'},
                 }}
             >
                 {languages.map((lang) => (
