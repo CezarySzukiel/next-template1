@@ -1,6 +1,12 @@
-import useTranslation from 'next-translate/useTranslation'
+import {getContent, getLangFromClientCookie} from "../../../utils/globalFunctions";
+
+import homePL from '../../../locales/pl/common.json';
+import homeEN from '../../../locales/en/common.json';
+
 
 export default function Page() {
-    const { t } = useTranslation('common')
-    return <h1>{t('message_2')}</h1>
+    const userLang = getLangFromClientCookie();
+    const content = getContent(homePL, homeEN, userLang);
+
+    return <h1>{content.message_2}</h1>
 }

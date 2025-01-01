@@ -1,58 +1,80 @@
 'use client';
-
-import {FormControl, MenuItem, Select} from '@mui/material';
-import useTranslation from 'next-translate/useTranslation';
-import i18n from '../../i18n';
-import {useEffect} from 'react';
+import {Divider, FormControl, MenuItem, Select, Typography} from '@mui/material';
 import Cookies from 'js-cookie';
+import {useEffect} from "react";
+import {useTheme} from "@mui/material/styles";
+
 
 export default function LangSelect() {
-    const {t, lang} = useTranslation('common');
-    const languages = i18n.locales;
-    const defaultLanguage = i18n.defaultLocale;
-    const language = Cookies.get('NEXT_LOCALE_') || defaultLanguage;
+    const languages = ['pl', 'en'];
+    const languageCookie = Cookies.get('NEXT_LOCALE_')
+    const language = languageCookie || 'pl';
+    const theme = useTheme();
+
     const setLangCookie = (lang) => {
         Cookies.set('NEXT_LOCALE_', lang, {expires: 90});
     };
 
+    const handleLangChange = (event) => {
+        setLangCookie(event.target.value);
+        window.location.reload();
+    };
+
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const langQueryParam = params.get('lang');
-
-        if (langQueryParam && languages.includes(langQueryParam)) {
-            setLangCookie(langQueryParam);
-        } else {
-            params.set('lang', language);
-            window.location.search = params.toString();
+        if (!languageCookie) {
+            setLangCookie(language);
         }
-    }, [language, languages]);
+    }, []);
 
-    const handleChange = (event) => {
-        const selectedLang = event.target.value;
-        setLangCookie(selectedLang);
-
-        const params = new URLSearchParams(window.location.search);
-        params.set('lang', selectedLang);
-        window.location.search = params.toString();
+    const menuProps = {
+        PaperProps: {
+            disableAutoFocusItem: false,
+        },
     };
 
     return (
-        <FormControl sx={{minWidth: 50}}>
-            <Select
-                value={language}
-                variant="standard"
-                disableUnderline
-                onChange={handleChange}
+        <>
+            <Divider
+                orientation="vertical"
+                variant="middle"
                 sx={{
-                    '.MuiInput-input': {backgroundColor: 'transparent!important'},
+                    borderBottomWidth: 3,
+                    backgroundColor: "white",
+                    height: "2rem",
+                    marginRight: theme.custom.margin.xsmall,
+                    marginLeft: theme.custom.margin.xsmall
                 }}
-            >
-                {languages.map((lang) => (
-                    <MenuItem key={lang} value={lang}>
-                        {lang.toUpperCase()}
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
+            />
+            <FormControl sx={{minWidth: 'auto'}}>
+                <Select
+                    value={language}
+                    variant="standard"
+                    disableUnderline
+                    onChange={handleLangChange}
+                    MenuProps={menuProps}
+                    IconComponent={() => <></>}
+                    sx={{
+                        color: "inherit",
+
+                        '.MuiInput-input': {
+                            backgroundColor: 'transparent!important',
+                            paddingRight: '0!important'
+                        },
+                        '.MuiSelect-select': {
+                            paddingRight: '0!important',
+                        },
+
+                    }}
+                >
+                    {languages.map((lang) => (
+                        <MenuItem key={lang} value={lang}>
+                            <Typography variant="subtitle1">
+                                {lang.toUpperCase()}
+                            </Typography>
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </>
     );
 }

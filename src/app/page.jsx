@@ -1,10 +1,14 @@
-import useTranslation from 'next-translate/useTranslation'
 import React from "react";
+import {getContent, getLangFromClientCookie} from "../../utils/globalFunctions";
+
+import homePL from '../../locales/pl/common.json';
+import homeEN from '../../locales/en/common.json';
 
 export default function Page() {
-  const { t } = useTranslation('common')
+    const userLang = getLangFromClientCookie();
+    const content = getContent(homePL, homeEN, userLang);
 
-  return <>
-  <h1>{t('message_1')}</h1>
-  </>
+    return <>
+        <h1>{content.message_1}</h1>
+    </>
 }
